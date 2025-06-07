@@ -1,10 +1,11 @@
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/access/')) {
-      const assetRequest = new Request(`${url.origin}/access.html`, request);
-      return await env.ASSETS.fetch(assetRequest);
+
+    if (url.pathname.startsWith("/access/")) {
+      const newRequest = new Request("https://robux-paradise.com/access.html", request);
+      return await fetch(newRequest);
     }
-    return env.ASSETS.fetch(request);
+    return await fetch(request);
   }
 }
