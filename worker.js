@@ -1,11 +1,15 @@
+const PAGES_URL = 'https://robux-paradise.com';
+
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request) {
     const url = new URL(request.url);
 
-    if (url.pathname.startsWith("/access/")) {
-      const newRequest = new Request("https://robux-paradise.com/access.html", request);
-      return await fetch(newRequest);
+    // Route dynamique vers access.html
+    if (url.pathname.startsWith('/access/')) {
+      return fetch(`${PAGES_URL}/access.html`, request);
     }
-    return await fetch(request);
+
+    // Tout le reste : sert depuis ton site Pages
+    return fetch(`${PAGES_URL}${url.pathname}`, request);
   }
 }
