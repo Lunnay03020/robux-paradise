@@ -1,0 +1,12 @@
+name = "robux-paradise"
+type = "javascript"
+account_id = "9b882c8789cdb9bbe7d28922923870a4"
+compatibility_date = "2024-06-01"
+
+[site]
+bucket = "./"
+entry-point = "."
+
+[env.production]
+workers_dev = false
+routes = ["https://robux-paradise.com/*"]

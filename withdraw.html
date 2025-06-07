@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Robux Paradise</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" type="image/png" href="https://cdn.discordapp.com/emojis/1372947613036318851.webp?size=44" />
+    <meta property="og:title" content="Robux Paradise" />
+    <meta property="og:description" content="Withdraw Robux easily and safely." />
+    <meta property="og:image" content="https://cdn.discordapp.com/attachments/1372969796173299872/1375588072238088212/cd3aaa26-36e5-4c04-af00-7cbed24dc3b4.png?ex=68323bb9&is=6830ea39&hm=3cf684e414779a8ca5b97e1e3661bd9c9705f83eb9ed0ede3122af0d2b27f865&" />
+    <meta property="og:url" content="https://robux-paradise.com/withdraw" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Robux Paradise" />
+    <meta name="twitter:description" content="Withdraw Robux easily and safely." />
+    <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1372969796173299872/1375588072238088212/cd3aaa26-36e5-4c04-af00-7cbed24dc3b4.png?ex=68323bb9&is=6830ea39&hm=3cf684e414779a8ca5b97e1e3661bd9c9705f83eb9ed0ede3122af0d2b27f865&" />
+  </head>
+  <body>
+  <header>
+    <div class="left-header">
+      <div class="logo">Robux Paradise</div>
+    </div>
+    <div class="right-header">
+      <a href="index.html" class="btn">Home</a>
+      <button class="btn" id="login-btn" onclick="openLoginModal()">Login</button>
+      <img id="profile-icon" class="profile-container hidden" onclick="toggleDropdown()" src="" />
+    </div>
+  </header>
+
+    <main>
+      <h1>Withdraw Robux</h1>
+      <p class="subtitle">Request your Robux withdrawal below</p>
+
+      <div class="withdraw-info">
+        <div class="balances-row">
+          <div class="info-block">
+            <h2>Current Stock :</h2>
+            <p class="robux-amount" id="robuxAmount">Loading...</p>
+          </div>
+          <div class="info-block">
+            <h2>Daily Withdraw :</h2>
+            <p id="dailyWithdrawAmount" class="robux-amount">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+    <button id="withdraw-btn">Withdraw R$</button>
+    </main>
+
+  <div id="withdraw-modal" class="modal hidden">
+    <div class="modal-content" style="position: relative;">
+      <span class="close-btn" onclick="closeWithdrawModal()">&times;</span>
+      <h3>Withdraw Robux</h3>
+      <input type="text" id="roblox-pseudo" placeholder="Roblox Username" required />
+      <input type="number" id="robux-amount" placeholder="Amount of R$ (Minimal : 10 R$)" min="10" required />
+      <button class="btn" onclick="prepareWithdraw()">Next</button>
+    </div>
+  </div>
+
+  <div id="confirm-withdraw-modal" class="modal hidden">
+    <div class="modal-content" style="position: relative;">
+      <span class="close-btn" onclick="closeConfirmWithdrawModal()">&times;</span>
+      <iframe src="https://www.youtube.com/embed/FQG7fvsXZcE" allowfullscreen></iframe>
+      <h3>Withdraw Confirmation</h3>
+      <p>R$ asked : <strong id="confirm-original-amount"></strong></p>
+      <p>Create a <strong id="confirm-final-amount"></strong> R$ Gamepass before confirming!</p>
+      <a href="https://create.roblox.com/dashboard/creations" target="_blank" rel="noopener noreferrer">
+      Click here to create a gamepass.
+      </a>
+      <p style="margin-top: 1em;">
+        Please note: once the transaction is complete, it will not be possible to reverse it.
+      </p>
+      <button id="confirm-withdraw-btn" class="btn">
+        CONFIRM
+      </button>
+      <button onclick="backToWithdrawModal()" class="btn">
+        Cancel
+      </button>
+      <div id="queue-status"></div>
+      <div id="withdraw-error" style="margin-top: 0.5rem;"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Robux Paradise | We are not affiliated with<br>Roblox in any way.
+  </footer>
+
+    <div id="profile-dropdown" class="dropdown-profile hidden">
+    <div class="profile-card">
+      <span class="close-btn" onclick="closeProfileDropdown()">&times;</span>
+      <img id="dropdown-avatar" src="" />
+      <h3 id="dropdown-name"></h3>
+      <p id="dropdown-balance"></p>
+      <button id="logout-btn" class="btn">Logout</button>
+    </div>
+  </div>
+
+  <div id="error-modal" class="modal hidden">
+    <div class="modal-content" style="position: relative;">
+      <span class="close-btn" onclick="closeErrorModal()">&times;</span>
+      <h3>Error</h3>
+      <p id="error-modal-message"></p>
+      <button class="btn" id="error-modal-close" onclick="closeErrorModal()">Close</button>
+    </div>
+  </div>
+
+    <script src="script.js"></script>
+    <script>
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    showErrorModal("You need to be logged in to access this page.");
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000);
+
+    const crossBtn = document.querySelector(".close-btn");
+    const closeBtn = document.getElementById("error-modal-close");
+
+    const redirect = () => {
+      window.location.href = "index.html";
+    };
+
+    if (crossBtn) crossBtn.onclick = redirect;
+    if (closeBtn) closeBtn.onclick = redirect;
+  }
+    </script>
+  </body>
+</html>
