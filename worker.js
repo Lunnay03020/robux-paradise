@@ -4,8 +4,8 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
     if (/^\/access\/[^\/]+$/.test(url.pathname)) {
-      return fetch(`${PAGES_URL}/access.html`, request);
+      return fetch(`${PAGES_URL}/access.html`);
     }
-    return fetch(`${PAGES_URL}${url.pathname}`, request);
+    return fetch(`${PAGES_URL}${url.pathname}`);
   }
 }
