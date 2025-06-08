@@ -1,4 +1,4 @@
-name = "robux-paradise-worker"
+name = "robux-paradise"
 account_id = "9b882c8789cdb9bbe7d28922923870a4"
 compatibility_date = "2024-06-01"
 main = "worker.js"
